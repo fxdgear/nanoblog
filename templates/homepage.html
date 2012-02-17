@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block container %}
+  <div class="row">
+    <div class="span6 offset3">
+      <fieldset>
+        <legend>Nanoblog!!</legend>
+        <div class="control-group">
+          <div class="controls">
+            <input class="input-xlarge" type="text" id="new-post" rows="3" placeholder="What going on?"></textarea>
+            <span class="ui-tooltip-top" style="display:none;">Press Enter to save this post</span>
+          </div>
+        </div>
+        <div class="form-actions">
+        </div>
+      </fieldset>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="span6 offset3">
+      <div id="posts">
+        <ul id="post-list"></ul>
+      </div>
+      <div id='post-stats'>
+    </div>
+  </div>
+
+
+
+  <!-- Templates -->
+
+  <script type="text/template" id="post-template">
+    <div class="post">
+      <div class="display">
+        <div class="post-body"></div>
+        <div class="post-date">published on <%= date %></div>
+      </div>
+      <div class="edit">
+        <input class="post-input" type="text" value="" />
+      </div>
+    </div>
+  </script>
+
+
+  <script type="text/template" id="stats-template">
+      <span class="post-count">
+        <span class="number"><%= total %> posts.</span>
+      </span>
+  </script>
+{% endblock container %}

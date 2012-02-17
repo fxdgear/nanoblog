@@ -89,7 +89,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '' #  Put something unique here...
+SECRET_KEY = '-c*xsyu4=--32v(k2kd9dk4)f5r$t_4s*6(%j169=k23c(^j34' #  Put something unique here...
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -126,11 +126,13 @@ DJANGO_APPS = [
 ]
 
 THIRDPARTY_APPS = [
-    
+    'tastypie',
+    'backbone_tastypie',
+    'south',
 ]
 
 PROJECT_APPS = [
-    
+    'nanoblog.blog',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRDPARTY_APPS + PROJECT_APPS

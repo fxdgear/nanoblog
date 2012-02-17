@@ -1,0 +1,8 @@
+.center{
+    text-align: center;
+}
+
+#post-list .editing .display,
+  #post-list .edit {
+    display: none;
+  }

@@ -106,7 +106,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = '.urls' # fix this so it has your project_name.urls
+ROOT_URLCONF = 'nanoblog.urls' # fix this so it has your project_name.urls
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".

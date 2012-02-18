@@ -17,7 +17,7 @@ class BlogResource(ModelResource):
 
 
 class PostResource(ModelResource):
-    business = fields.ForeignKey(BlogResource, 'blog')
+    blog = fields.ForeignKey(BlogResource, 'blog')
 
     class Meta:
         queryset = Post.objects.all()

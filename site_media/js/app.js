@@ -1,19 +1,25 @@
 $(function(){
-
   window.Post = Backbone.Model.extend({
       defaults: function(){
           return {
               created_on: new Date()
           };
+      },
+
+      url: function(){
+        return this.get('resource_uri') || this.collection.url;
       }
   });
 
   window.Blog = Backbone.Model.extend({});
 
   window.PostList = Backbone.Collection.extend({
-      model: Post,
-      localStorage: new Store("posts")
-
+    url: POST_API,
+    model: Post,
+    //localStorage: new Store("posts")
+    parse: function(data){
+      return data.objects;
+    }
   });
 
   window.Posts = new PostList();
@@ -32,7 +38,7 @@ $(function(){
     },
 
     render: function(){
-      var date = dateFormat(this.model.get('created_on'), 'm/dd/yy');
+      var date = dateFormat(this.model.get('created_on'), 'dddd, mmmm dS, yyyy, h:MM:ss TT');
       $(this.el).html(this.template({
         date: date
       }));
@@ -41,16 +47,24 @@ $(function(){
     },
 
     setText: function(){
-      var text = this.model.get('text');
+      var text = this.model.get('body');
       this.$('.post-body').text(text);
       this.input = this.$('.post-input');
-      //this.input.bind('blur', _.bind(this.close, this)).val(text);
+      this.input.bind('blur', _.bind(this.close, this)).val(text);
     },
 
 
     edit: function(){
       $(this.el).addClass("editing");
       this.input.focus();
+    },
+
+    close: function(){
+      this.model.save({
+        body: this.input.val(),
+        created_on: new Date()
+      });
+      $(this.el).removeClass('editing');
     },
 
 
@@ -84,7 +98,7 @@ $(function(){
 
     addOne: function(post){
       var view = new PostView({model: post});
-      $("#post-list").append(view.render().el);
+      $("#post-list").prepend(view.render().el);
     },
 
     addAll: function(){
@@ -94,7 +108,10 @@ $(function(){
     createOnEnter: function(e) {
       var text = this.input.val();
       if (!text || e.keyCode != 13) return;
-      Posts.create({text: text});
+      Posts.create({
+          body: text,
+          blog: BLOG_URI
+        });
       this.input.val('');
     },
 

@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 
 {% block container %}
+  <script>
+    POST_API = "{% url api_dispatch_list resource_name='post' api_name='v1' %}";
+    BLOG_URI = "{% url api_dispatch_list resource_name='blog' api_name='v1' %}" + "{{ blog.pk }}" + "/";
+  </script>
+
   <div class="row">
     <div class="span6 offset3">
       <fieldset>
